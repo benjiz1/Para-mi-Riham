@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para RIham ❤️</title>
+<style>
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; }
+body {
+  min-height: 100vh;
+  overflow: hidden;
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255,238,180,.45), transparent 25%),
+    radial-gradient(circle at 80% 15%, rgba(255,170,90,.35), transparent 25%),
+    linear-gradient(135deg, #e85d04, #f48c06 45%, #dc2f02);
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+#garden {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.flower {
+  position: absolute;
+  bottom: -90px;
+  font-size: clamp(24px, 4vw, 46px);
+  opacity: .75;
+  animation: rise linear infinite;
+  filter: drop-shadow(0 5px 8px rgba(120,35,0,.3));
+}
+@keyframes rise {
+  0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+  12% { opacity: .8; }
+  50% { transform: translateY(-55vh) rotate(12deg); }
+  100% { transform: translateY(-115vh) rotate(-18deg); opacity: 0; }
+}
+
+.card {
+  position: relative;
+  z-index: 2;
+  width: min(92vw, 850px);
+  max-height: 94vh;
+  overflow: auto;
+  text-align: center;
+  padding: 28px;
+  border: 2px solid rgba(255,255,255,.55);
+  border-radius: 30px;
+  background: rgba(75, 20, 5, .30);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 25px 70px rgba(70, 15, 0, .4);
+}
+
+h1 {
+  margin: 0 0 18px;
+  font-size: clamp(2rem, 5vw, 4rem);
+  line-height: 1.05;
+  text-shadow: 0 4px 15px rgba(80,0,0,.45);
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+  opacity: .95;
+}
+
+.photo {
+  width: min(100%, 650px);
+  display: block;
+  margin: 0 auto 22px;
+  border-radius: 20px;
+  box-shadow: 0 12px 35px rgba(55,0,0,.5);
+  /* La imagen original no se altera: solo se muestra dentro de la página. */
+}
+
+.buttons {
+  min-height: 125px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  position: relative;
+}
+
+button {
+  border: 0;
+  border-radius: 999px;
+  padding: 16px 32px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform .18s ease, box-shadow .18s ease;
+  touch-action: manipulation;
+}
+
+#yes {
+  background: #ff1744;
+  color: white;
+  box-shadow: 0 8px 25px rgba(255,23,68,.4);
+}
+#yes:hover { transform: scale(1.06); }
+
+#no {
+  background: #fff;
+  color: #c62828;
+  position: relative;
+  z-index: 5;
+}
+
+#loveMessage {
+  display: none;
+  animation: appear .7s ease forwards;
+}
+@keyframes appear {
+  from { transform: scale(.4); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+#loveMessage h2 {
+  margin: 10px 0;
+  font-size: clamp(2.5rem, 8vw, 6.5rem);
+  line-height: .95;
+  color: #fff;
+  text-shadow:
+    0 0 12px #ff1744,
+    0 6px 20px rgba(80,0,0,.55);
+}
+#loveMessage p {
+  font-size: clamp(1.1rem, 3vw, 1.7rem);
+}
+
+.heart {
+  position: fixed;
+  top: -50px;
+  z-index: 10;
+  pointer-events: none;
+  animation: fall linear forwards;
+}
+@keyframes fall {
+  to {
+    transform: translateY(115vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+.hidden { display: none !important; }
+
+@media (max-width: 600px) {
+  .card { padding: 20px 14px; border-radius: 22px; }
+  .buttons { gap: 12px; }
+  button { padding: 14px 24px; }
+}
+</style>
+</head>
+<body>
+
+<div id="garden"></div>
+
+<main class="card" id="mainCard">
+  <section id="question">
+    <h1>RIham, ¿te gustaría ser mi pareja? ❤️</h1>
+    <div class="subtitle">Tengo una preguntita muy importante para ti...</div>
+
+    <img class="photo" src="imagen.png" alt="Nuestra imagen">
+
+    <div class="buttons">
+      <button id="yes">Sí ❤️</button>
+      <button id="no">No 😳</button>
+    </div>
+  </section>
+
+  <section id="loveMessage">
+    <div style="font-size:4rem">💖🌷💖</div>
+    <h2>Ahora estaremos juntitos mi vida</h2>
+    <p>🥰 Te quiero muchísimo, RIham. 🥰</p>
+    <div style="font-size:3rem">🌷❤️🌷❤️🌷</div>
+  </section>
+</main>
+
+<script>
+const garden = document.getElementById("garden");
+const yes = document.getElementById("yes");
+const no = document.getElementById("no");
+const question = document.getElementById("question");
+const loveMessage = document.getElementById("loveMessage");
+
+const flowerTypes = ["🌷","🌸","🌺","🌹","🌼"];
+for (let i = 0; i < 28; i++) {
+  const flower = document.createElement("span");
+  flower.className = "flower";
+  flower.textContent = flowerTypes[Math.floor(Math.random() * flowerTypes.length)];
+  flower.style.left = Math.random() * 100 + "vw";
+  flower.style.animationDuration = (7 + Math.random() * 9) + "s";
+  flower.style.animationDelay = (-Math.random() * 14) + "s";
+  flower.style.fontSize = (22 + Math.random() * 28) + "px";
+  garden.appendChild(flower);
+}
+
+let yesScale = 1;
+
+function escapeNo() {
+  // En pantallas grandes se mueve por toda la tarjeta.
+  // En móviles también funciona al tocarlo.
+  const card = document.getElementById("mainCard");
+  const rect = card.getBoundingClientRect();
+  const maxX = Math.max(20, rect.width - no.offsetWidth - 35);
+  const maxY = Math.max(20, rect.height - no.offsetHeight - 35);
+
+  no.style.position = "absolute";
+  no.style.left = (15 + Math.random() * maxX) + "px";
+  no.style.top = (rect.top * 0 + 190 + Math.random() * Math.max(20, maxY - 160)) + "px";
+
+  yesScale = Math.min(2.4, yesScale + 0.13);
+  yes.style.transform = `scale(${yesScale})`;
+}
+
+no.addEventListener("mouseenter", escapeNo);
+no.addEventListener("touchstart", (e) => {
+  e.preventDefault();
+  escapeNo();
+}, {passive:false});
+no.addEventListener("click", escapeNo);
+
+yes.addEventListener("click", () => {
+  question.classList.add("hidden");
+  loveMessage.style.display = "block";
+  document.body.style.overflow = "hidden";
+  launchHearts();
+});
+
+function launchHearts() {
+  const symbols = ["❤️","💖","💕","💗","🌷","✨","💘"];
+  for (let i = 0; i < 90; i++) {
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+    h.style.left = Math.random() * 100 + "vw";
+    h.style.fontSize = (18 + Math.random() * 30) + "px";
+    h.style.animationDuration = (2.5 + Math.random() * 4) + "s";
+    h.style.animationDelay = (Math.random() * 1.2) + "s";
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 7000);
+  }
+}
+</script>
+</body>
+</html>
